@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/falanyx/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -50,6 +50,9 @@ plugins=(gitfast ruby rails gem docker sudo)
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
+if [[ $UID == 0 ]]; then
+  export PATH="/sbin:/usr/sbin:$PATH"
+fi
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

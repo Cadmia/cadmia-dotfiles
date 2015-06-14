@@ -28,7 +28,7 @@ echo "Installing VIm files"
 cp "$DIR/.vimrc" ~/.vimrc
 cp -r "$DIR/.vim" ~/.vim
 echo "Grabbing vim modules"
-pushd
+mkdir -p ~/.vim/bundle
 cd ~/.vim/bundle
 git clone https://github.com/mattn/emmet-vim.git
 git clone https://github.com/othree/eregex.vim.git
