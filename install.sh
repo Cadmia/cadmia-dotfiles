@@ -21,8 +21,6 @@ chsh -s `which zsh`
 echo "Installing ZSH files"
 cp "$DIR/.zshrc" ~/.zshrc
 sed -i.bak 's/\/home\/falanyx/$HOME/' ~/.zshrc
-mkdir -p ~/.oh-my-zsh/custom/themes
-cp "$DIR/erathis.zsh-theme" ~/.oh-my-zsh/custom/themes/
 
 echo "Installing VIm files"
 cp "$DIR/.vimrc" ~/.vimrc
