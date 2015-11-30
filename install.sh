@@ -38,4 +38,7 @@ git clone https://github.com/bling/vim-airline.git
 git clone https://github.com/altercation/vim-colors-solarized
 git clone https://github.com/tpope/vim-fugitive
 
+echo "Installing tmux files"
+cp "$DIR/.tmux.conf" ~/.tmux.conf
+
 echo "Installed. Please restart your session!"
