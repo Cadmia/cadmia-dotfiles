@@ -85,11 +85,11 @@ export EDITOR='vim'
 
 function tmux-shared() {
   [[ $#@ -eq 1 ]] || { echo "Usage: $0 <session-name>"; return 1 }
-  if [ ! -e "/tmp/tmuxs" ]; then
-    tmux -S "/tmp/tmuxs" start-server
-    chmod 777 "/tmp/tmuxs"
+  if [ ! -e /tmp/tmuxs ]; then
+    tmux -S /tmp/tmuxs start-server
+    chmod 777 /tmp/tmuxs
   fi
-  tmux new-session -A -s "$1"
+  tmux -S /tmp/tmuxs new-session -A -s "$1"
 }
 
 alias tmuxs="tmux-shared"
