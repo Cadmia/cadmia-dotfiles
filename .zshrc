@@ -82,5 +82,16 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-bindkey "5C" forward-word
-bindkey "5D" backward-word
+
+function tmux-shared() {
+  [[ $#@ -eq 1 ]] || { echo "Usage: $0 <session-name>"; return 1 }
+  if [ ! -e "/tmp/tmuxs" ]; then
+    tmux -S "/tmp/tmuxs" start-server
+    chmod 777 "/tmp/tmuxs"
+  fi
+  tmux new-session -A -s "$1"
+}
+
+alias tmuxs="tmux-shared"
+alias stmux="tmux-shared"
+alias stux="tmux-shared"
