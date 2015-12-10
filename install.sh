@@ -37,8 +37,14 @@ git clone https://github.com/vim-scripts/taglist.vim.git
 git clone https://github.com/bling/vim-airline.git
 git clone https://github.com/altercation/vim-colors-solarized
 git clone https://github.com/tpope/vim-fugitive
+git clone https://github.com/mxw/vim-jsx.git
 
 echo "Installing tmux files"
 cp "$DIR/.tmux.conf" ~/.tmux.conf
+
+echo "Installing ESLint configurations."
+cp "$DIR/.eslintrc" ~/.eslintrc
+echo "Make sure, if you haven't, to run the following command:"
+echo "npm install -g eslint babel-eslint eslint-plugin-react"
 
 echo "Installed. Please restart your session!"

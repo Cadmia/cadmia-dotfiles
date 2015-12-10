@@ -55,6 +55,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#syntastic#enabled = 1
 
+" ========= Language Settings (Javascript) =========
+let g:jsx_ext_required = 0 " Allow JSX in normal JSX files
+let g:syntastic_javascript_checkers = ['eslint']
+
 " ========= Rebindings =========
 " Reindent entire file, return to last position
 map <Leader>i mmgg=G`m<CR> 
