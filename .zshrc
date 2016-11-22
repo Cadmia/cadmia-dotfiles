@@ -96,3 +96,5 @@ function tmux-shared() {
 alias tmuxs="tmux-shared"
 alias stmux="tmux-shared"
 alias stux="tmux-shared"
+
+[ -f .myzshrc ] && source .myzshrc
