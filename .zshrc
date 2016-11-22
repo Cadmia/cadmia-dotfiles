@@ -89,7 +89,8 @@ function tmux-shared() {
     tmux -S /tmp/tmuxs start-server
     chmod 777 /tmp/tmuxs
   fi
-  tmux -S /tmp/tmuxs new-session -A -s "$1"
+  tmux -S /tmp/tmuxs new-session -d -s "$1"
+  tmux -S /tmp/tmuxs new-session -A -t "$1" -s "${USER}-$1"
 }
 
 alias tmuxs="tmux-shared"

@@ -1,50 +1,38 @@
 #!/bin/bash
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-unset ZSH
+cd "$DIR"
 
-echo "Installing ZSH and oh-my-zsh"
-echo "Please enter your password when prompted"
-if which zsh >/dev/null; then
-  echo "ZSH installed. Not apt-getting"
-else
-  sudo apt-get install zsh
+if ! [[ ./ -ef ~/.dotfiles ]]; then
+  mv "$DIR" ~/.dotfiles
+  /bin/bash ~/.dotfiles/install.sh
+  cd ~
+  exit 0;
 fi
-if which curl >/dev/null; then
-  echo "CURL installed. Not apt-getting"
-else
-  sudo apt-get install curl
-fi
-curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-chsh -s `which zsh`
+
+echo "Backing up old files..."
+mkdir "$DIR/bak"
+cp ~/.zshrc "$DIR/bak/"
+cp ~/.vimrc "$DIR/bak/"
+cp ~/.eslintrc "$DIR/bak/"
+cp ~/.tmux.conf "$DIR/bak/"
+cp -r ~/.vim "$DIR/bak/.vim"
 
 echo "Installing ZSH files"
-cp "$DIR/.zshrc" ~/.zshrc
-sed -i.bak 's/\/home\/falanyx/$HOME/' ~/.zshrc
+ln -sf "$DIR/.zshrc" ~/.zshrc
 
 echo "Installing VIm files"
-cp "$DIR/.vimrc" ~/.vimrc
-cp -r "$DIR/.vim" ~/.vim
-echo "Grabbing vim modules"
-mkdir -p ~/.vim/bundle
-cd ~/.vim/bundle
-git clone https://github.com/mattn/emmet-vim.git
-git clone https://github.com/othree/eregex.vim.git
-git clone https://github.com/vim-scripts/mru.vim.git
-git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/scrooloose/syntastic.git
-git clone https://github.com/vim-scripts/taglist.vim.git
-git clone https://github.com/bling/vim-airline.git
-git clone https://github.com/vim-airline/vim-airline-themes
-git clone https://github.com/altercation/vim-colors-solarized
-git clone https://github.com/tpope/vim-fugitive
-git clone https://github.com/mxw/vim-jsx.git
+ln -sf "$DIR/.vimrc" ~/.vimrc
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim -c ":PlugInstall|q|q"
 
 echo "Installing tmux files"
-cp "$DIR/.tmux.conf" ~/.tmux.conf
+ln -sf "$DIR/.tmux.conf" ~/.tmux.conf
 
 echo "Installing ESLint configurations."
-cp "$DIR/.eslintrc" ~/.eslintrc
+ln -sf "$DIR/.eslintrc" ~/.eslintrc
+
 echo "Make sure, if you haven't, to run the following command:"
 echo "npm install -g eslint babel-eslint eslint-plugin-react"
 
