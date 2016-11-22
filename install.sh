@@ -10,6 +10,11 @@ if ! [[ ./ -ef ~/.dotfiles ]]; then
   exit 0;
 fi
 
+echo "Installing prerequisites..."
+if ! type "apt-get" > /dev/null; then
+  sudo apt-get install build-essential cmake python-dev python3-dev
+fi
+
 echo "Backing up old files..."
 mkdir "$DIR/bak"
 cp ~/.zshrc "$DIR/bak/"
